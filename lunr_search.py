@@ -49,18 +49,12 @@ class Search_index_JSON_Generator(object):
         page_text = soup_text.get_text(' ', strip=True).replace('“', '"').replace('”', '"').replace('’', "'").replace('¶', ' ').replace('^', '&#94;')
         page_text = ' '.join(page_text.split())
 
-        #page_category = page.category.name if getattr(page, 'category', 'None') != 'None' else ''
-
-        #page_tags = page.tags if getattr(page, 'tags', 'None') != 'None' else ''
-
         page_url = '.'
         if page.url:
             page_url = page.url if self.relative_urls else (self.siteurl + '/' + page.url)
 
         node = {'title': page_title,
                 'text': page_text,
-                #'category': page_category,
-                #'tags': page_tags,
                 'url': page_url
                 }
 
@@ -74,13 +68,10 @@ class Search_index_JSON_Generator(object):
         page_title = soup.title.string if soup.title is not None else ''
         page_text = soup.get_text()
 
-        # Should set default category?
-        #page_category = ''
         page_url = urljoin(self.siteurl, self.tpages[srclink])
 
         node = {'title': page_title,
                 'text': page_text,
-                #'category': page_category,
                 'url': page_url
                 }
 
